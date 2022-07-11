@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: flaskdep
+  name: flaskdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskdep
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: flaskdep
+    spec:
+      containers:
+      - image: shomaigu/kabafla:latest
+        name: kabafla
+        ports:
+        - containerPort: 5000
