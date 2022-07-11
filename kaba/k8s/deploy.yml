@@ -20,3 +20,36 @@ spec:
         name: kabafla
         ports:
         - containerPort: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: db
+  name: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: mariadb
+        name: mariadb
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MARIADB_ROOT_PASSWORD
+          value: "tmcit"
+        - name: MARIADB_DATABASE
+          value: "ques"
+        - name: MARIADB_USER
+          value: "docker"
+        - name: MARIADB_PASSWORD
+          value: "docker"
