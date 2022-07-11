@@ -7,8 +7,7 @@ app = Flask(__name__, static_folder='./templates/img')
 
 @app.route('/')
 def index():
-    global name
-    return render_template("index.html",name = name)
+    return render_template("index.html")
 
 
 

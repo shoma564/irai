@@ -9,6 +9,7 @@ RUN apt -y install nodejs npm
 
 RUN mkdir -p /usr/src/app/
 COPY ./requirements.txt /usr/src/app/
+ADD ./pyapp /usr/src/app/
 RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 
 
