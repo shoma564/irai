@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  flask:
+    container_name: flaskkaba
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+#    volumes:
+#      - ./app/pyapp:/usr/src/app/
+#      - ./app/pyapp/templates:/usr/src/app/templates
+    restart: always
+    tty: true
