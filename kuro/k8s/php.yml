@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  labels:
+    app: php
+  name: php-apc-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - image: php:7.0-apache
+        name: php
+---
+apiVersion: v1
+
+kind: Service
+
+metadata:
+  labels:
+    app: php
+  name: php-apc-service
+
+spec:
+  selector:
+    app: php
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP

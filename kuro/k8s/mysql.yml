@@ -1,0 +1,43 @@
+kind: Deployment
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql/mysql-server
+        name: mysql
+        env:
+        - name: MYSQL_DATABASE
+          value: "mysql"
+        - name: MYSQL_USER
+          value: "mysql"
+        - name: MYSQL_PASSWORD
+          value: "mysql"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "mysql"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  selector:
+    app: mysql
+  type: NodeIP
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
