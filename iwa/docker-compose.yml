@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   flask:
     container_name: flaskkaba
@@ -13,3 +12,24 @@ services:
 #      - ./app/pyapp/templates:/usr/src/app/templates
     restart: always
     tty: true
+
+
+  db:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./db/Dockerfile
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: tmcit
+      MARIADB_DATABASE: ques
+      MARIADB_USER: tmcit
+      MARIADB_PASSWORD: tmcit
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./initdb.d/:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password --character->
+    ports:
+      - 3306:3306
