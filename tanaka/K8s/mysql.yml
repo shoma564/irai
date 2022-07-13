@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tanadb
+  name: tanadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tanadb
+  template:
+    metadata:
+      labels:
+        app: tanadb
+    spec:
+      containers:
+      - image: mariadb:latest
+        name: tanadb
+        env:
+        - name: MYSQL_DATABASE
+          value: "database"
+        - name: MYSQL_USER
+          value: "db-user"
+        - name: MYSQL_PASSWORD
+          value: "db-pass"
+        - name: MYSQL_ROOT_PASSWORD
+          value: "root"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: tanadb
+  name: tanadb
+spec:
+  selector:
+    app: tanadb
+  type: NodePort
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP

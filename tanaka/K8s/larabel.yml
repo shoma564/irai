@@ -18,7 +18,7 @@ spec:
       - image: shomaigu/tana_php
         name: tana-php
         ports:
-        - containerPort: 80
+        - containerPort: 9000
 
 ---
 
@@ -31,9 +31,9 @@ metadata:
   name: phpsvc
 spec:
   ports:
-  - port: 80
+  - port: 9000
     protocol: TCP
-    targetPort: 80
+    targetPort: 9000
   selector:
     app: phpdep
   type: NodePort
