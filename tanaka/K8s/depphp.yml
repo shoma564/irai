@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: phpdep
+  name: phpdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpdep
+  template:
+    metadata:
+      labels:
+        app: phpdep
+    spec:
+      containers:
+      - image: shomaigu/tana_php
+        name: tana-php
+        ports:
+        - containerPort: 80
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: phpdep
+  name: phpsvc
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: phpdep
+  type: NodePort
+status:
