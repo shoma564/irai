@@ -1,21 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   labels:
-    app: flaskdep
-  name: flaskdep
+    app: kaba_flaskdep
+  name: kaba_flaskdep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flaskdep
+      app: kaba_flaskdep
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: flaskdep
+        app: kaba_flaskdep
     spec:
       containers:
       - image: shomaigu/iwa_fla:latest
-        name: kabafla
+        name: kaba_flaskdep
         ports:
         - containerPort: 5000
 
@@ -25,17 +26,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: db
-  name: db
+    app: kaba_db
+  name: kaba_db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: db
+      app: kaba_db
   template:
     metadata:
       labels:
-        app: db
+        app: kaba_db
     spec:
       containers:
       - image: mariadb
